@@ -11,6 +11,15 @@ app.get('/api/produtos', (req, res) =>{
     ])
 })
 
+app.get('/api/areas', (req, res) =>{
+    res.json([
+        {id: 1, name: 'Centro'},
+        {id: 2, name: 'Guarus'},
+        {id: 3, name: 'Pelinca'},
+        {id: 4, name: 'IPS'},
+    ])
+})
+
 app.listen(7000, ()=>{
     console.log('Server os running on port 7000')
 })
