@@ -2,6 +2,6 @@
 API feita para o trabalho final da disciplina de Testes Automatizados 2022.2 
 
 npm init -y
-npm i -D typescript @types/node express @types/express ts-node-dev cors @types/cors
+npm i -D typescript @types/node express @types/express ts-node-dev cors @types/cors jest @types/jest
 
 npm start para rodar [tsnd src/index.ts]
