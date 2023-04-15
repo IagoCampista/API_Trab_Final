@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import ProdutoRepository from './repositories/produtoRepository'
 import factory from './factories/factory'
+import Controller from './controller/controller'
 
 const produtoRepository = new ProdutoRepository()
 const controller = factory();
@@ -33,23 +34,16 @@ app.get('/api/categorias', (req, res) =>{
 })
 
 app.get('/api/clientes', (req, res) =>{
-    res.json([
-        {id: 1, name: 'LucasFilm', cnpj: '00.000.000/0001-00', nivelDesconto: 'ouro', dataUltimaProspeccao: '2021-09-01', area: 1},
-        {id: 2, name: 'Coca-Cola', cnpj: '00.000.000/0002-00', nivelDesconto: 'prata', dataUltimaProspeccao: '2021-09-02', area: 2},
-        {id: 3, name: 'Microsoft', cnpj: '00.000.000/0003-00', nivelDesconto: 'ruby', dataUltimaProspeccao: '2021-09-03', area: 3},
-        {id: 4, name: 'Apple', cnpj: '00.000.000/0004-00', nivelDesconto: 'ouro', dataUltimaProspeccao: '2021-09-04', area: 4},
-        {id: 5, name: 'Samsung', cnpj: '00.000.000/0005-00', nivelDesconto: 'diamante', dataUltimaProspeccao: '2021-09-05', area: 1},
-        {id: 6, name: 'Sony', cnpj: '00.000.000/0006-00', nivelDesconto: 'prata', dataUltimaProspeccao: '2021-09-06', area: 2},
-        {id: 7, name: 'Disney', cnpj: '00.000.000/0007-00', nivelDesconto: 'ruby', dataUltimaProspeccao: '2021-09-07', area: 3},
-        {id: 8, name: 'Amazon', cnpj: '00.000.000/0008-00', nivelDesconto: 'esmeralda', dataUltimaProspeccao: '2021-09-08', area: 4},
-        {id: 9, name: 'Google', cnpj: '00.000.000/0009-00', nivelDesconto: 'diamante', dataUltimaProspeccao: '2021-09-09', area: 1},
-        {id: 10, name: 'Facebook', cnpj: '00.000.000/0010-00', nivelDesconto: 'ouro', dataUltimaProspeccao: '2021-09-10', area: 2},
-        {id: 11, name: 'Twitter', cnpj: '00.000.000/0011-00', nivelDesconto: 'prata', dataUltimaProspeccao: '2021-09-11', area: 3},
-        {id: 12, name: 'Instagram', cnpj: '00.000.000/0012-00', nivelDesconto: 'ruby', dataUltimaProspeccao: '2021-09-12', area: 4},
-        {id: 13, name: 'TikTok', cnpj: '00.000.000/0013-00', nivelDesconto: 'esmeralda', dataUltimaProspeccao: '2021-09-13', area: 1},
-        {id: 14, name: 'Netflix', cnpj: '00.000.000/0014-00', nivelDesconto: 'diamante', dataUltimaProspeccao: '2021-09-14', area: 2},
-        {id: 15, name: 'Spotify', cnpj: '00.000.000/0015-00', nivelDesconto: 'ouro', dataUltimaProspeccao: '2021-09-15', area: 3}
-    ])
+    controller.pegarClientes(req, res);
+})
+
+app.post('/api/registerClientes', (req, res)  =>{
+    controller.adicionarCliente(req, res);
+})
+
+app.post('/api/updateProspectionDate', (req, res)  =>{
+    const {cnpj} = req.body;
+    controller.atualizarDataUltimaProspeccao(req, res);
 })
 
 app.listen(7000, ()=>{
