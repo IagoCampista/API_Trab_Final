@@ -46,6 +46,15 @@ app.post('/api/updateProspectionDate', (req, res)  =>{
     controller.atualizarDataUltimaProspeccao(req, res);
 })
 
+app.post('/api/registerVendedores', (req, res)  =>{
+    controller.adicionarVendedor(req, res);
+})
+
+app.get('/api/vendedores', (req, res) =>{
+    const {email} = req.body;
+    controller.pegarVendedorPeloEmail(req, res);
+})
+
 app.listen(7000, ()=>{
     console.log('Server os running on port 7000')
 })
