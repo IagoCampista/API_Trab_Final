@@ -1,7 +1,8 @@
 import { IClienteUseCase } from "..//useCase/gerenciadordeCliente";
 import { IProdutoUseCase } from "../useCase/buscadorDeProduto";
-import {Request,Response} from 'express';
-import { IVendedorUseCase } from "..//useCase/gerenciadorDeUsuario";
+import { Request, Response } from 'express';
+import { IVendedorUseCase } from "../useCase/gerenciadorDeVendedor";
+
 
 export default class Controller {
 
@@ -84,7 +85,7 @@ export default class Controller {
               })        
        }
        async pegarVendedorPeloEmail(req: Request, res:Response){
-              let email = req.body.email;
+              const { email } = req.body;
               let result = this.vendedorUseCase.getVendedorByEmail(email);
               result.then(response=>{                       
                      res.status(200).json(response);
@@ -94,6 +95,20 @@ export default class Controller {
                      res.send()
               })        
        }
+       async login(req:Request, res:Response){       
+              const { email, senha } = req.body;
+              
+              let vendedorToken = this.vendedorUseCase.addDadosLogin(email, senha);
 
+              vendedorToken.then(token =>{            
+                     res.status(200).send(token);
+                     
+              }).catch(error=>{            
+                     console.log("Sent 400:"+error);
+                     res.status(400);
+                     res.statusMessage = error;
+                     res.send()
+              })
+       }
 
 }

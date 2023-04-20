@@ -1,10 +1,12 @@
 import { IVendedorRepository } from "@src/repositories/vendedorRepository";
+import crypto from 'crypto';
 
 
 export interface IVendedorUseCase {
     repo: IVendedorRepository;
     getVendedorByEmail(email: string): Promise<string>
     addVendedor(nome: string, email: string, senha: string):Promise<string>;
+    addDadosLogin(email: string, senha: string): Promise<string>;
 }
 
 export class VendedorUseCase implements IVendedorUseCase {
@@ -29,6 +31,21 @@ export class VendedorUseCase implements IVendedorUseCase {
               return Promise.reject("Vendedor já existe");
        }
        
+       async addDadosLogin(email: string, senha: string): Promise<string> {       
+              let vendedor = this.repo.findVendedorByEmail(email);
+              if(vendedor === undefined){
+                     return Promise.reject(new Error('Vendedor não encontrado'));
+              }
+              if(vendedor.senha !== senha){
+                     return Promise.reject(new Error('Senha incorreta'));
+              }
+              let newAuthToken = crypto.createHash('md5').update(Math.random().toString()).digest('hex');
+              this.repo.addVendedorToken(email, newAuthToken);
+              
+              return Promise.resolve(newAuthToken);
+       }
+
+
        stringify(entity:any, fieldsToRemove:any) {
               return JSON.stringify(entity, (key, value) => {
               if (fieldsToRemove.includes(key)) {

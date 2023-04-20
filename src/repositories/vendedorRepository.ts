@@ -5,8 +5,9 @@ import * as fs from 'fs';
 export interface IVendedorRepository {
        listaVendedores: IVendedor[];
        fileName: string;
-       findVendedorByEmail(email: string): IVendedor | undefined
+       findVendedorByEmail(email: string): IVendedor | undefined;
        addVendedor(nome: string, email: string, senha: string): boolean;
+       addVendedorToken(email: string, token: string): boolean;
 }
 
 export default class VendedorRepository implements IVendedorRepository {
@@ -46,7 +47,16 @@ export default class VendedorRepository implements IVendedorRepository {
               let vendedor = new Vendedor(id, nome, email, senha)
               this.listaVendedores.push(vendedor);
               this.saveListaVendedores();
-              return true;
-              
+              return true;   
        }
+
+       addVendedorToken(email: string, token: string): boolean {
+              let index = this.listaVendedores.findIndex((vendedor) => vendedor.email === email)
+              if(index !== -1){
+                     return false;
+              }
+              this.listaVendedores[index].token = (token);
+              return true;   
+       }
+
 }

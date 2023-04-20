@@ -50,9 +50,12 @@ app.post('/api/registerVendedores', (req, res)  =>{
     controller.adicionarVendedor(req, res);
 })
 
-app.get('/api/vendedores', (req, res) =>{
-    const {email} = req.body;
+app.post('/api/vendedorPeloEmail', (req, res) =>{
     controller.pegarVendedorPeloEmail(req, res);
+})
+
+app.post('/api/login', (req, res)  =>{
+    controller.login(req, res);
 })
 
 app.listen(7000, ()=>{

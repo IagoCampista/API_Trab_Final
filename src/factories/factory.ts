@@ -3,7 +3,7 @@ import Controller from "../controller/controller";
 import produtoRepository from "../repositories/produtoRepository";
 import { ProdutoUseCase } from "../useCase/buscadorDeProduto";
 import clienteRepository from "../repositories/clienteRepository";
-import { VendedorUseCase } from "../useCase/gerenciadorDeUsuario";
+import { VendedorUseCase } from "../useCase/gerenciadorDeVendedor";
 import vendedorRepository from "../repositories/vendedorRepository";
 
 

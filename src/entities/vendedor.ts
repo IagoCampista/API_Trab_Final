@@ -2,7 +2,8 @@ export interface IVendedor{
        id: number, 
        nome: string,
        email: string,
-       senha: string
+       senha: string,
+       token?: string
 }
 
 export default class Vendedor implements IVendedor {
