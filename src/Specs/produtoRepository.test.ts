@@ -18,17 +18,17 @@ describe("ProdutoRepository", () => {
        repo = new ProdutoRepository("test");
   });
   
-  it('should set test',()=>{
+  it('confifura o fileName para test',()=>{
       repo = new ProdutoRepository("test");
       expect(repo.fileName).toEqual("test");
-    })
+    });
     
-  it('should set the fileName property to "users" by default', () => {
+  it('configura o fileName como "users"', () => {
       repo = new ProdutoRepository();
       expect(repo.fileName).toBe('products');
     });
 
-  it("should return an array of products", () => {
+  it("retorna um array de produtos", () => {
     const produtos = repo.getProdutos();
     expect(produtos).toEqual(mockProdutos);
   });
